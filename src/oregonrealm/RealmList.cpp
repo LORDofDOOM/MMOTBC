@@ -79,14 +79,14 @@ void RealmList::Initialize(uint32 updateInterval)
     UpdateRealms(true);
 }
 
-void RealmList::UpdateRealm( uint32 ID, const std::string& name, const std::string& address, uint32 port, uint8 icon, RealmFlags realmflags, uint8 timezone, AccountTypes allowedSecurityLevel, float popu, const char* builds)
+void RealmList::UpdateRealm( uint32 ID, const std::string& name, const std::string& address, uint32 port, uint8 icon, RealmFlags color, uint8 timezone, AccountTypes allowedSecurityLevel, float popu, const char* builds)
 {
     // Create new if not exist or update existed
     Realm& realm = m_realms[name];
 
     realm.m_ID       = ID;
     realm.icon       = icon;
-    realm.realmflags = realmflags;
+    realm.color = color;
     realm.timezone   = timezone;
     realm.allowedSecurityLevel = allowedSecurityLevel;
     realm.populationLevel      = popu;
@@ -97,10 +97,10 @@ void RealmList::UpdateRealm( uint32 ID, const std::string& name, const std::stri
     for (iter = tokens.begin(); iter != tokens.end(); ++iter)
     {
         uint32 build = atol((*iter).c_str());
-        realm.realmbuilds.insert(build);
+        realm.gamebuild.insert(build);
     }
 
-    uint16 first_build = !realm.realmbuilds.empty() ? *realm.realmbuilds.begin() : 0;
+    uint16 first_build = !realm.gamebuild.empty() ? *realm.gamebuild.begin() : 0;
 
     realm.realmBuildInfo.build = first_build;
     realm.realmBuildInfo.major_version = 0;
@@ -139,7 +139,7 @@ void RealmList::UpdateRealms(bool init)
     sLog.outDetail("Updating Realm List...");
 
     //                                                        0   1     2        3     4     5           6         7                     8           9
-    QueryResult_AutoPtr result = LoginDatabase.Query( "SELECT id, name, address, port, icon, realmflags, timezone, allowedSecurityLevel, population, realmbuilds FROM realmlist WHERE (realmflags & 1) = 0 ORDER BY name" );
+    QueryResult_AutoPtr result = LoginDatabase.Query( "SELECT id, name, address, port, icon, color, timezone, allowedSecurityLevel, population, gamebuild FROM realmlist WHERE (color & 1) = 0 ORDER BY name" );
 
     // Circle through results and add them to the realm map
     if (result)
@@ -150,17 +150,17 @@ void RealmList::UpdateRealms(bool init)
 
             uint8 allowedSecurityLevel = fields[7].GetUInt8();
 
-            uint8 realmflags = fields[5].GetUInt8();
+            uint8 color = fields[5].GetUInt8();
 
-            if (realmflags & ~(REALM_FLAG_OFFLINE|REALM_FLAG_NEW_PLAYERS|REALM_FLAG_RECOMMENDED|REALM_FLAG_SPECIFYBUILD))
+            if (color & ~(REALM_FLAG_OFFLINE|REALM_FLAG_NEW_PLAYERS|REALM_FLAG_RECOMMENDED|REALM_FLAG_SPECIFYBUILD))
             {
                 sLog.outError("Realm allowed have only OFFLINE Mask 0x2), or NEWPLAYERS (mask 0x20), or RECOMENDED (mask 0x40), or SPECIFICBUILD (mask 0x04) flags in DB");
-                realmflags &= (REALM_FLAG_OFFLINE|REALM_FLAG_NEW_PLAYERS|REALM_FLAG_RECOMMENDED|REALM_FLAG_SPECIFYBUILD);
+                color &= (REALM_FLAG_OFFLINE|REALM_FLAG_NEW_PLAYERS|REALM_FLAG_RECOMMENDED|REALM_FLAG_SPECIFYBUILD);
             }
 
             UpdateRealm(
                 fields[0].GetUInt32(), fields[1].GetCppString(),fields[2].GetCppString(),fields[3].GetUInt32(),
-                fields[4].GetUInt8(), RealmFlags(realmflags), fields[6].GetUInt8(),
+                fields[4].GetUInt8(), RealmFlags(color), fields[6].GetUInt8(),
                 (allowedSecurityLevel <= SEC_ADMINISTRATOR ? AccountTypes(allowedSecurityLevel) : SEC_ADMINISTRATOR),
                 fields[8].GetFloat(), fields[9].GetString());
 

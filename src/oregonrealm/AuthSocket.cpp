@@ -897,17 +897,17 @@ void AuthSocket::LoadRealmlist(ByteBuffer &pkt, uint32 acctid)
                 else
                     AmountOfCharacters = 0;
 
-                bool ok_build = std::find(i->second.realmbuilds.begin(), i->second.realmbuilds.end(), _build) != i->second.realmbuilds.end();
+                bool ok_build = std::find(i->second.gamebuild.begin(), i->second.gamebuild.end(), _build) != i->second.gamebuild.end();
 
                 RealmBuildInfo const* buildInfo = ok_build ? FindBuildInfo(_build) : NULL;
                 if (!buildInfo)
                     buildInfo = &i->second.realmBuildInfo;
 
-                RealmFlags realmflags = i->second.realmflags;
+                RealmFlags color = i->second.color;
 
                 // 1.x clients not support explicitly REALM_FLAG_SPECIFYBUILD, so manually form similar name as show in more recent clients
                 std::string name = i->first;
-                if (realmflags & REALM_FLAG_SPECIFYBUILD)
+                if (color & REALM_FLAG_SPECIFYBUILD)
                 {
                     char buf[20];
                     snprintf(buf, 20," (%u,%u,%u)", buildInfo->major_version, buildInfo->minor_version, buildInfo->bugfix_version);
@@ -916,10 +916,10 @@ void AuthSocket::LoadRealmlist(ByteBuffer &pkt, uint32 acctid)
 
                 // Show offline state for unsupported client builds and locked realms (1.x clients not support locked state show)
                 if (!ok_build || (i->second.allowedSecurityLevel >= _accountSecurityLevel))
-                    realmflags = RealmFlags(realmflags | REALM_FLAG_OFFLINE);
+                    color = RealmFlags(color | REALM_FLAG_OFFLINE);
 
                 pkt << uint32(i->second.icon);              // realm type
-                pkt << uint8(realmflags);                   // realmflags
+                pkt << uint8(color);                   // color
                 pkt << name;                                // name
                 pkt << i->second.address;                   // address
                 pkt << float(i->second.populationLevel);
@@ -958,7 +958,7 @@ void AuthSocket::LoadRealmlist(ByteBuffer &pkt, uint32 acctid)
                 else
                     AmountOfCharacters = 0;
 
-                bool ok_build = std::find(i->second.realmbuilds.begin(), i->second.realmbuilds.end(), _build) != i->second.realmbuilds.end();
+                bool ok_build = std::find(i->second.gamebuild.begin(), i->second.gamebuild.end(), _build) != i->second.gamebuild.end();
 
                 RealmBuildInfo const* buildInfo = ok_build ? FindBuildInfo(_build) : NULL;
                 if (!buildInfo)
@@ -966,7 +966,7 @@ void AuthSocket::LoadRealmlist(ByteBuffer &pkt, uint32 acctid)
 
                 uint8 lock = (i->second.allowedSecurityLevel > _accountSecurityLevel) ? 1 : 0;
 
-                RealmFlags realmFlags = i->second.realmflags;
+                RealmFlags realmFlags = i->second.color;
 
                 // Show offline state for unsupported client builds
                 if (!ok_build)
