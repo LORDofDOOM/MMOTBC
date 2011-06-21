@@ -299,6 +299,59 @@ bool ChatHandler::HandleAccountLockCommand(const char* args)
     return true;
 }
 
+//GuildHouse Tele
+bool ChatHandler::HandleGHCommand(const char* args)
+{
+        Player *chr = m_session->GetPlayer();
+
+        if(chr->isInFlight())
+        {
+                //pokud hrac leti
+                SendSysMessage(LANG_YOU_IN_FLIGHT);
+                SetSentErrorMessage(true);
+                return false;
+        }
+
+        if(chr->isInCombat())
+        {
+                //pokud je hrac v combatu
+                SendSysMessage(LANG_YOU_IN_COMBAT);
+                SetSentErrorMessage(true);
+                return false;
+        }
+
+        if (chr->GetGuildId() == 0)
+        {
+                //pokud hrac nema guildu
+                return false;
+        }
+
+        QueryResult result;
+            result = CharacterDatabase.PQuery("SELECT `x`, `y`, `z`, `map` FROM `guild_houses` WHERE `guildId` = %u", chr->GetGuildId());
+        if(result == NULL)
+        {
+                //pokud guilda nema guildhouse zapsany v tabulce guildhouses
+                SendSysMessage("Du hast kein Gildenhaus");
+                return false;
+        }
+
+
+        float x, y, z;
+        uint32 map;
+
+        Field *fields = result->Fetch();
+        x = fields[0].GetFloat();
+        y = fields[1].GetFloat();
+        z = fields[2].GetFloat();
+        map = fields[3].GetUInt32();
+        
+
+        chr->SaveRecallPosition();
+        chr->TeleportTo(map, x, y, z, 0);
+        chr->SaveToDB();
+        return true;
+}
+
 // Display the 'Message of the day' for the realm
 bool ChatHandler::HandleServerMotdCommand(const char* /*args*/)
 {

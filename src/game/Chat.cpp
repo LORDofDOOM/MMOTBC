@@ -679,6 +679,8 @@ ChatCommand * ChatHandler::getCommandTable()
         { "unbindsight",    SEC_ADMINISTRATOR,  false, &ChatHandler::HandleUnbindSightCommand,         "", NULL },
 		//Mall Teleporter
 		{ "mall",                      SEC_PLAYER,      false, &ChatHandler::HandleMallCommand,                  "", NULL }, 
+		//GuildHouse Tele
+		{ "gh",             SEC_PLAYER,      false, &ChatHandler::HandleGHCommand,                  "", NULL },				
         { NULL,             0,                  false, NULL,                                           "", NULL }
     };
 
