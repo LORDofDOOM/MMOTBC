@@ -29,6 +29,9 @@ void AddSC_npc_tokens();
 void AddSC_npc_buff();
 void AddSC_npc_heal();
 
+//custom
+void AddSC_item_teleport();
+
 //examples
 //void AddSC_custom_example();
 //void AddSC_custom_gossip_codebox();
@@ -416,6 +419,9 @@ void AddScripts()
      //Custom
      AddSC_npc_buff();
      AddSC_npc_heal();	 
+ 
+     //Custom
+     AddSC_item_teleport();	 
 	 
 //    AddSC_custom_example();
 //    AddSC_custom_gossip_codebox();
