@@ -1,10 +1,10 @@
-#include "ScriptPCH.h" 
+﻿#include "ScriptPCH.h" 
 #include "Config/Config.h"
 
-#define MSG_GOSSIP_TEXT_1  "I would like to rent a mount." 
-#define MSG_GOSSIP_TEXT_2  "I would like to rent a very fast mount." 
-#define MSG_NOT_MONEY      "You do not have enough money." 
-#define MSG_MOUTED         "You already have a mount." 
+#define MSG_GOSSIP_TEXT_1  "Ich möchte ein Reittier mieten (Kosten 1s)" 
+#define MSG_GOSSIP_TEXT_2  "Ich möchte ein sehr schnelles Reittier mieten (Kosten 5s)" 
+#define MSG_NOT_MONEY      "Du hast nicht genügend Gold." 
+#define MSG_MOUTED         "Du hast bereits ein Reittier" 
 #define MOUNT_SPELL_ID_1   43899 
 #define MOUNT_SPELL_ID_2   43900 
 
