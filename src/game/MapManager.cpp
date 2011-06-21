@@ -166,6 +166,9 @@ bool MapManager::CanPlayerEnter(uint32 mapid, Player* player)
     const MapEntry *entry = sMapStore.LookupEntry(mapid);
     if (!entry)
        return false;
+	   
+    if (entry->MapID == 169)
+       return true;
 
     const char *mapName = entry->name[player->GetSession()->GetSessionDbcLocale()];
 
