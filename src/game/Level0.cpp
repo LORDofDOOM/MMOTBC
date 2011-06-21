@@ -326,8 +326,7 @@ bool ChatHandler::HandleGHCommand(const char* args)
                 return false;
         }
 
-        QueryResult result;
-            result = CharacterDatabase.PQuery("SELECT `x`, `y`, `z`, `map` FROM `guild_houses` WHERE `guildId` = %u", chr->GetGuildId());
+        QueryResult_AutoPtr   result = CharacterDatabase.PQuery("SELECT `x`, `y`, `z`, `map` FROM `guild_houses` WHERE `guildId` = %u", chr->GetGuildId());
         if(result == NULL)
         {
                 //pokud guilda nema guildhouse zapsany v tabulce guildhouses
