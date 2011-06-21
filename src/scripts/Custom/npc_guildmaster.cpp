@@ -8,7 +8,7 @@ EndScriptData */
 #include "ScriptPCH.h"
 #include "Config/Config.h"
 
-extern DatabaseType WorldDatabase;
+extern DatabaseType CharacterDatabase;
 
 #define MSG_GOSSIP_TELE          "Zum Gildenhaus teleportieren"
 #define MSG_GOSSIP_NEXTPAGE      "Weiter -->"
@@ -57,7 +57,7 @@ bool getGuildHouseCoords(uint32 guildId, float &x, float &y, float &z, uint32 &m
         return false;
     }
 
-    QueryResult_AutoPtr result = WorldDatabase.PQuery("SELECT `x`, `y`, `z`, `map` FROM `guild_houses` WHERE `guildId` = %u", guildId);
+    QueryResult_AutoPtr result = CharacterDatabase.PQuery("SELECT `x`, `y`, `z`, `map` FROM `guild_houses` WHERE `guildId` = %u", guildId);
     if(result)
     {
         Field *fields = result->Fetch();
@@ -103,7 +103,7 @@ bool showBuyList(Player *player, Creature *_creature, uint32 showFromId = 0)
 {
     //show not occupied guildhouses
 
-    QueryResult_AutoPtr result = WorldDatabase.PQuery("SELECT `id`, `comment` FROM `guild_houses` WHERE `guildId` = 0 AND `id` > %u ORDER BY `id` ASC LIMIT %u",
+    QueryResult_AutoPtr result = CharacterDatabase.PQuery("SELECT `id`, `comment` FROM `guild_houses` WHERE `guildId` = 0 AND `id` > %u ORDER BY `id` ASC LIMIT %u",
         showFromId, GOSSIP_COUNT_MAX);
 
     if (result)
@@ -157,7 +157,7 @@ bool showBuyList(Player *player, Creature *_creature, uint32 showFromId = 0)
 bool isPlayerHasGuildhouse(Player *player, Creature *_creature, bool whisper = false)
 {
 
-    QueryResult_AutoPtr result = WorldDatabase.PQuery("SELECT `comment` FROM `guild_houses` WHERE `guildId` = %u",
+    QueryResult_AutoPtr result = CharacterDatabase.PQuery("SELECT `comment` FROM `guild_houses` WHERE `guildId` = %u",
         player->GetGuildId());
 
     if (result)
@@ -196,7 +196,7 @@ void buyGuildhouse(Player *player, Creature *_creature, uint32 guildhouseId)
     }
 
     //check if somebody already occupied this GH
-    QueryResult_AutoPtr result = WorldDatabase.PQuery("SELECT `id` FROM `guild_houses` WHERE `id` = %u AND `guildId` <> 0",
+    QueryResult_AutoPtr result = CharacterDatabase.PQuery("SELECT `id` FROM `guild_houses` WHERE `id` = %u AND `guildId` <> 0",
         guildhouseId);
 
     if (result)
@@ -206,7 +206,7 @@ void buyGuildhouse(Player *player, Creature *_creature, uint32 guildhouseId)
     }
 
     //update DB
-    QueryResult_AutoPtr result_updt = WorldDatabase.PQuery("UPDATE `guild_houses` SET `guildId` = %u WHERE `id` = %u",
+    QueryResult_AutoPtr result_updt = CharacterDatabase.PQuery("UPDATE `guild_houses` SET `guildId` = %u WHERE `id` = %u",
         player->GetGuildId(), guildhouseId);
     
     player->ModifyMoney(-buyprice);
@@ -219,7 +219,7 @@ void sellGuildhouse(Player *player, Creature *_creature)
     uint32 sellprice = (sConfig.GetIntDefault("GuildMasterNPC.SellPriceInGold",400)*10000);
     if (isPlayerHasGuildhouse(player, _creature))
     {
-        QueryResult_AutoPtr result = WorldDatabase.PQuery("UPDATE `guild_houses` SET `guildId` = 0 WHERE `guildId` = %u",
+        QueryResult_AutoPtr result = CharacterDatabase.PQuery("UPDATE `guild_houses` SET `guildId` = 0 WHERE `guildId` = %u",
         player->GetGuildId());
         
         player->ModifyMoney(sellprice);
