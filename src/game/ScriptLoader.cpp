@@ -11,6 +11,11 @@
 
 #ifdef SCRIPTS
 
+#include "../scripts/Custom/sc_npc_teleport.h"
+  
+//custom
+void AddSC_npc_teleport();
+
 //examples
 //void AddSC_custom_example();
 //void AddSC_custom_gossip_codebox();
@@ -380,6 +385,12 @@ void AddSC_onevents();
 void AddScripts()
 {
 #ifdef SCRIPTS
+
+    //Custom
+    AddSC_npc_teleport();
+    QueryResult_AutoPtr result;
+    LoadNpcTele(result);
+
 //    AddSC_custom_example();
 //    AddSC_custom_gossip_codebox();
 //    AddSC_test();
