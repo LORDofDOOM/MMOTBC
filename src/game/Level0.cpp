@@ -239,31 +239,33 @@ bool ChatHandler::HandleMallCommand(const char* /*args*/)
 {
        //MALL command
        
-       Player* _player = m_session->GetPlayer();
+       Player* player = m_session->GetPlayer();
 
-	   if (_player->isInCombat())
+	   if (player->isInCombat())
        {
        SendSysMessage(LANG_YOU_IN_COMBAT);
        SetSentErrorMessage(true);
        return false;
        }
-       if (_player->isInFlight())
+       if (player->isInFlight())
        {
        SendSysMessage(LANG_YOU_IN_FLIGHT);
        SetSentErrorMessage(true);
        return false;
        }
 
-       _player->ResurrectPlayer(0.5, false);
+       //player->ResurrectPlayer(0.5, false);
 
-       switch(_player->GetTeam())
+       switch(player->GetTeam())
   {
        case ALLIANCE:
-               _player->TeleportTo(0, -8865.454102f, 591.230469f, 92.323326f, 4.69254f);    // Insert Ally mall Cords here
+               //player->TeleportTo(0, -8865.454102f, 591.230469f, 92.323326f, 4.69254f);    // Insert Ally mall Cords here
+			   player->TeleportTo(530, -1913.069214, 5404.819336, -12.428004, 0.301288);    // Insert Ally mall Cords here
                break;
 
        case HORDE:
-                _player->TeleportTo(1, 1554.14f, -4424.46f, 9.86212f, 5.96413f);    // Insert Horde mall Cords here
+               //player->TeleportTo(1, 1554.14f, -4424.46f, 9.86212f, 5.96413f);    // Insert Horde mall Cords here
+			   player->TeleportTo(530, -1913.069214, 5404.819336, -12.428004, 0.301288);    // Insert Ally mall Cords here				
                break;
   }
        return true;
