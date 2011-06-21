@@ -1897,6 +1897,32 @@ CharDelete.KeepDays = 30
 ###############################################################################
 # CUSTOM SERVER OPTIONS
 #
+#    GuildMasterNPC.BuyEnabled
+#        Allow players to buy Guild Houses.
+#        Default: 1 (Yes)
+#                 0 (No)
+#
+#    GuildMasterNPC.BuyGossip
+#        Text for buy menu option (good idea to include price)
+#        Default: "Buy a Guild House for 500 Gold"
+#
+#    GuildMasterNPC.BuyPriceInGold
+#        Amount in gold needed to purchase a guild house.
+#        Default: 500 (Gold)
+#
+#    GuildMasterNPC.SellEnabled
+#        Allow players to sell Guild Houses.
+#        Default: 1 (Yes)
+#                 0 (No)
+#
+#    GuildMasterNPC.SellGossip
+#        Text for sell menu option (good idea to include price)
+#        Default: "Sell your Guild House for 400 Gold"
+#
+#    GuildMasterNPC.SellPriceInGold
+#        Amount of gold given to player when selling guild house.
+#        Default: 400 (Gold)
+#
 #    PlayerStart.AllReputation
 #        Players will start with most of the high level reputations that are
 #         needed for items, mounts etc.
@@ -1989,6 +2015,12 @@ CharDelete.KeepDays = 30
 #
 ###############################################################################
 
+GuildMasterNPC.BuyEnabled = 1
+GuildMasterNPC.BuyGossip = "Buy a Guild House for 500 Gold"
+GuildMasterNPC.BuyPriceInGold = 500
+GuildMasterNPC.SellEnabled = 1
+GuildMasterNPC.SellGossip = "Sell your GuildHouse for 400 Gold"
+GuildMasterNPC.SellPriceInGold = 400
 PlayerStart.AllReputation = 0
 PlayerStart.AllSpells = 0
 PlayerStart.MapsExplored = 0

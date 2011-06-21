@@ -16,6 +16,9 @@
 //custom
 void AddSC_npc_teleport();
 
+//custom
+void AddSC_npc_guildmaster();
+
 //examples
 //void AddSC_custom_example();
 //void AddSC_custom_gossip_codebox();
@@ -391,6 +394,9 @@ void AddScripts()
     QueryResult_AutoPtr result;
     LoadNpcTele(result);
 
+     //Custom
+     AddSC_npc_guildmaster();	
+	
 //    AddSC_custom_example();
 //    AddSC_custom_gossip_codebox();
 //    AddSC_test();
