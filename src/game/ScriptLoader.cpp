@@ -22,6 +22,9 @@ void AddSC_npc_guildmaster();
 //custom
 void AddSC_npc_rentalmount();
 
+//custom
+void AddSC_npc_tokens();
+
 //examples
 //void AddSC_custom_example();
 //void AddSC_custom_gossip_codebox();
@@ -402,6 +405,9 @@ void AddScripts()
 
      //Custom
      AddSC_npc_rentalmount();
+
+     //Custom
+     AddSC_npc_tokens();
 	 
 //    AddSC_custom_example();
 //    AddSC_custom_gossip_codebox();
