@@ -25,6 +25,10 @@ void AddSC_npc_rentalmount();
 //custom
 void AddSC_npc_tokens();
 
+//custom
+void AddSC_npc_buff();
+void AddSC_npc_heal();
+
 //examples
 //void AddSC_custom_example();
 //void AddSC_custom_gossip_codebox();
@@ -408,6 +412,10 @@ void AddScripts()
 
      //Custom
      AddSC_npc_tokens();
+	 
+     //Custom
+     AddSC_npc_buff();
+     AddSC_npc_heal();	 
 	 
 //    AddSC_custom_example();
 //    AddSC_custom_gossip_codebox();
