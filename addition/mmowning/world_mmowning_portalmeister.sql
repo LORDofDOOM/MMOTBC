@@ -1,5 +1,6 @@
 ﻿-- -----------------------------------------------------------------------------------------------------------------------------
 -- # Defining what the entries and numbers are. Change if something overwrites something in your database
+SET NAMES 'utf8';
 
 SET @TELENPC := 300005; -- # (1)
 

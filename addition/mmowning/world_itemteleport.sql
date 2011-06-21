@@ -1,3 +1,4 @@
+SET NAMES 'utf8';
 
 CREATE TABLE IF NOT EXISTS `item_teleports` (
   `entry` int(10) unsigned NOT NULL,

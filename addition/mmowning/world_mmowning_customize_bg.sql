@@ -1,3 +1,5 @@
+SET NAMES 'utf8';
+
 -- Alterac Valley Original 20
 UPDATE battleground_template SET MinPlayersPerTeam 	 = '10' WHERE id = 1;
 -- Warsong Gulch Original 5

@@ -1,3 +1,5 @@
+SET NAMES 'utf8';
+
 DELETE FROM creature_template WHERE `entry`=990002;
 DELETE FROM creature_template WHERE `entry`=990003;
 

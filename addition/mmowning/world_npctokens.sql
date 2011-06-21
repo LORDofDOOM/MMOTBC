@@ -1,3 +1,5 @@
+SET NAMES 'utf8';
+
 -- Table structure for table `npc_tokens`
 
 CREATE TABLE IF NOT EXISTS `npc_tokens` (

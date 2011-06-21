@@ -1,3 +1,5 @@
+SET NAMES 'utf8';
+
 DROP TABLE IF EXISTS `version`;
 
 CREATE TABLE IF NOT EXISTS `version` (

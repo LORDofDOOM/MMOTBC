@@ -1,3 +1,5 @@
+SET NAMES 'utf8';
+
 -- Data for table `instance_template`
 INSERT INTO `instance_template` (`map`, `parent`, `maxPlayers`, `reset_delay`, `access_id`, `startLocX`, `startLocY`, `startLocZ`, `startLocO`, `script`) VALUES
 (169, 0, 40, 0, 0, NULL, NULL, NULL, NULL, '');
