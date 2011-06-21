@@ -1,4 +1,4 @@
-###############################################
+﻿###############################################
 # Oregon Core World Server configuration file #
 ###############################################
 
@@ -1923,6 +1923,14 @@ CharDelete.KeepDays = 30
 #        Amount of gold given to player when selling guild house.
 #        Default: 400 (Gold)
 #
+#    RentalMountNPC.SlowPrice
+#        Price in copper for regular mount.
+#        Default: 100 (1 silver)
+#
+#    RentalMountNPC.FastPrice
+#        Price in copper for swift mount.
+#        Default: 500 (5 silver)
+#
 #    PlayerStart.AllReputation
 #        Players will start with most of the high level reputations that are
 #         needed for items, mounts etc.
@@ -2016,11 +2024,13 @@ CharDelete.KeepDays = 30
 ###############################################################################
 
 GuildMasterNPC.BuyEnabled = 1
-GuildMasterNPC.BuyGossip = "Buy a Guild House for 500 Gold"
-GuildMasterNPC.BuyPriceInGold = 500
+GuildMasterNPC.BuyGossip = "Ein Gildenhaus für 100.000 Gold kaufen ?"
+GuildMasterNPC.BuyPriceInGold = 100000
 GuildMasterNPC.SellEnabled = 1
-GuildMasterNPC.SellGossip = "Sell your GuildHouse for 400 Gold"
-GuildMasterNPC.SellPriceInGold = 400
+GuildMasterNPC.SellGossip = "Dein Gildenhaus für 50.000 Gold verkaufen"
+GuildMasterNPC.SellPriceInGold = 50000
+RentalMountNPC.SlowPrice = 100
+RentalMountNPC.FastPrice = 500
 PlayerStart.AllReputation = 0
 PlayerStart.AllSpells = 0
 PlayerStart.MapsExplored = 0
