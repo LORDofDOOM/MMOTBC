@@ -1,0 +1,167 @@
+-- All credit goes to ZxBiohazardZx for the work on referencing Trainer, all i did was copy table and rename entry to add in one trainer
+-- Master Trainer with entry #90001
+-- Trainer tested on Trinitycore build 8761 for client version 3.3.3a + TDB-333.9.31
+-- http://forum.trinitycore.org/topic/14336-custom-trainer-all-in-one/
+-- Reference class to add some missing spells you get from quest and some others.
+SET @Druid :=90001; -- Adding missing spell you get from quest.
+SET @Shaman :=90001; -- Adding missing spell you get from quest.
+SET @Hunter :=90001; -- Adding missing spell you get from quest.
+SET @Mage :=90001; -- Adding missing spell you get from quest.
+SET @Warlock :=90001; -- Adding missing spell you get from quest.
+SET @Warrior :=90001; -- Adding missing spell you get from quest.
+SET @Paladin :=90001; -- Adding missing spell you get from quest.
+SET @GMspells :=90001;
+SET @Skills :=90001;
+SET @Trainer :=90001;
+
+-- Clean Trainer before inserting new NPC,spells & skills.
+DELETE FROM `creature` WHERE `id`=@Trainer;
+DELETE FROM `creature_template` WHERE `entry`=@Trainer;
+DELETE FROM `npc_trainer` WHERE `entry`=@Trainer;
+
+-- Create Trainer NPC
+INSERT INTO `creature_template` (`entry`,`KillCredit1`,`KillCredit2`,`modelid_A`,`modelid_A2`,`modelid_H`,`modelid_H2`,`name`,`subname`,`IconName`,`gossip_menu_id`,`minlevel`,`maxlevel`,`faction_A`,`faction_H`,`npcflag`,`scale`,`rank`,`mindmg`,`maxdmg`,`dmgschool`,`attackpower`,`baseattacktime`,`rangeattacktime`,`unit_flags`,`dynamicflags`,`family`,`trainer_type`,`trainer_spell`,`minrangedmg`,`maxrangedmg`,`rangedattackpower`,`type`,`type_flags`,`lootid`,`pickpocketloot`,`skinloot`,`resistance1`,`resistance2`,`resistance3`,`resistance4`,`resistance5`,`resistance6`,`spell1`,`spell2`,`spell3`,`spell4`,`PetSpellDataId`,`mingold`,`maxgold`,`AIName`,`MovementType`,`InhabitType`,`RacialLeader`,`RegenHealth`,`equipment_id`,`mechanic_immune_mask`,`flags_extra`,`ScriptName`) VALUES
+(@Trainer,        -- entry
+0,                -- KillCredit1
+0,                -- KillCredit2
+22931,            -- modelid1
+0,                -- modelid2
+22931,                -- modelid3
+0,                -- modelid4
+'MMOwning Trainer',   -- name
+'Deckard Cain', -- subname
+'',               -- IconeName
+0,                -- gossip_menu_id
+80,               -- minlevel
+80,               -- maxlevel
+35,               -- faction_A
+35,               -- faction_h
+51,               -- npcflag
+1,                -- scale
+0,                -- rank
+1755,             -- mindmg
+1755,             -- maxdmg
+0,                -- dmgschool
+1504,             -- attackpower
+1500,             -- baseattacktime
+0,                -- rangeattacktime
+0,                -- unit_flags
+0,                -- dynamicflags
+0,                -- family
+2,                -- trainer_type
+0,                -- trainer_spell
+0,                -- minrangedmg
+0,                -- maxrangedmg
+0,                -- rangedattackpower
+7,                -- type
+0,                -- type_flags
+0,                -- lootid
+0,                -- pickpocketloot
+0,                -- skinloot
+0,                -- resistance1
+0,                -- resistance2
+0,                -- resistance3
+0,                -- resistance4
+0,                -- resistance5
+0,                -- resistance6
+0,                -- spell1
+0,                -- spell2
+0,                -- spell3
+0,                -- spell4
+0,                -- PetSpellDataId
+0,                -- mingold
+0,                -- maxgold
+'',               -- AIName
+0,                -- MovementType
+3,                -- InhabitType
+0,                -- RacialLeader
+1,                -- RegenHealth
+0,                -- equipment_id
+0,                -- mechanic_immune_mask
+0,                -- flags_extra
+'');               -- ScriptName
+
+-- Make Trainer mounted (Comment this part if you dont want him mounted)
+DELETE FROM `creature_template_addon` WHERE `entry`=@Trainer;
+INSERT INTO `creature_template_addon` (`entry`,`path_id`,`mount`,`bytes1`,`bytes2`,`emote`,`auras`) VALUES 
+(@Trainer,0,24725,0,4096,0,NULL);
+
+-- Insert spells to trainer
+INSERT INTO `npc_trainer` (`entry`,`spell`) VALUES
+(@Trainer,-200001), -- Warrior-Lowlevel
+(@Trainer,-200002), -- Warrior-Highlevel
+(@Trainer,-200003), -- Paladin-Lowlevel
+(@Trainer,-200004), -- Paladin-Highlevel
+(@Trainer,-200005), -- Druid-Lowlevel
+(@Trainer,-200006), -- Druid-Highlevel
+(@Trainer,-200007), -- Mage-Lowlevel
+(@Trainer,-200008), -- Mage-Highlevel
+(@Trainer,-200009), -- Warlock-Lowlevel
+(@Trainer,-200010), -- Warlock-Highlevel
+(@Trainer,-200011), -- Priest-Lowlevel
+(@Trainer,-200012), -- Priest-Highlevel
+(@Trainer,-200013), -- Hunter-Lowlevel
+(@Trainer,-200014), -- Hunter-Highlevel
+(@Trainer,-200015), -- Rogue-Lowlevel
+(@Trainer,-200016), -- Rogue-Highlevel
+(@Trainer,-200017), -- Shaman-Lowlevel
+(@Trainer,-200018); -- Shaman-Highlevel
+
+
+-- Missing spells you get from quest.
+INSERT INTO `npc_trainer` (`entry`,`spell`,`spellcost`,`reqskill`,`reqskillvalue`,`reqlevel`) VALUES 
+(@Druid,5487,0,0,0,10), -- Bear Form
+(@Shaman,8071,0,0,0,4), -- Stoneskin Totem Rank 1
+(@Shaman,3599,0,0,0,10), -- Searing Totem Rank 1
+(@Shaman,5394,0,0,0,20), -- Healing Stream Totem Rank 1
+(@Hunter,883,0,0,0,10), -- Call Pet
+(@Hunter,2641,0,0,0,10), -- Dismiss Pet
+(@Hunter,6991,0,0,0,10), -- Feed Pet
+(@Hunter,982,0,0,0,10), -- Revive Pet
+(@Hunter,1515,0,0,0,10), -- Tame Beast
+(@Paladin,7328,0,0,0,12), -- Erlösung
+(@Mage,61305,0,0,0,60), -- Polymorph (Black Cat)
+(@Mage,28272,0,0,0,60), -- Polymorph (Pig)
+(@Mage,61721,0,0,0,60), -- Polymorph (Rabbit)
+(@Mage,61780,0,0,0,60), -- Polymorph (Turkey)
+(@Mage,28271,0,0,0,60), -- Polymorph (Turtle)
+(@Mage,61316,0,0,0,80), -- Dalaran Brillance
+(@Mage,61024,0,0,0,80), -- Dalaran Intellect
+(@Warlock,697,0,0,0,10), -- Summon Voidwalker
+(@Warlock,712,0,0,0,20), -- Summon Succubus
+(@Warlock,691,0,0,0,30), -- Summon Felhunter
+(@Warlock,1122,0,0,0,50), -- Inferno
+(@Warlock,18540,0,0,0,60), -- Ritual of Doom
+(@Warrior,71,0,0,0,10), -- Defensive Stance
+(@Warrior,7386,0,0,0,10), -- Sunder Armor
+(@Warrior,355,0,0,0,10), -- Taunt
+(@Warrior,2458,0,0,0,30); -- Berserker Stance
+
+-- GM Spells (Need to be level 81 to learn)
+-- INSERT INTO `npc_trainer` (`entry`,`spell`,`spellcost`,`reqskill`,`reqskillvalue`,`reqlevel`) VALUES 
+-- (@GMspells,1908,0,0,0,81), -- Uber Heal Over Time
+-- (@GMspells,35912,0,0,0,81); -- Master Buff
+
+-- Skills
+INSERT INTO `npc_trainer` (`entry`,`spell`,`spellcost`,`reqskill`,`reqskillvalue`,`reqlevel`) VALUES 
+(@Skills,33388,40000,0,0,20), -- Apprentice Riding
+(@Skills,33391,500000,33388,0,40), -- Journeyman Riding
+(@Skills,34090,2500000,33391,0,60), -- Expert Riding
+(@Skills,34091,50000000,34090,0,70), -- Artisan Riding
+(@Skills,54197,10000000,34090,0,77), -- Cold Weather Flying
+(@Skills,196,10000,0,0,1), -- One-Handed Axes
+(@Skills,197,10000,0,0,1), -- Two-Handed Axes
+(@Skills,198,10000,0,0,1), -- One-Handed Maces
+(@Skills,199,10000,0,0,1), -- Two-Handed Maces
+(@Skills,200,10000,0,0,1), -- Polearms
+(@Skills,201,10000,0,0,1), -- One-Handed Swords
+(@Skills,202,10000,0,0,1), -- Two-Handed Swords
+(@Skills,227,10000,0,0,1), -- Staves
+(@Skills,264,10000,0,0,1), -- Bows
+(@Skills,266,10000,0,0,1), -- Guns
+(@Skills,1180,10000,0,0,1), -- Daggers
+(@Skills,2567,10000,0,0,1), -- Throwns
+(@Skills,5011,10000,0,0,1), -- Crossbows
+(@Skills,15590,10000,0,0,1), -- Fists
+(@Skills,8737,10000,0,0,40), -- Mail Armor
+(@Skills,750,10000,0,0,40); -- Plate Armor
