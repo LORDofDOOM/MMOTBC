@@ -237,38 +237,38 @@ bool ChatHandler::HandleAccountPasswordCommand(const char* args)
 //Mall Teleporter
 bool ChatHandler::HandleMallCommand(const char* /*args*/)
 {
-       //MALL command
-       
-       Player* player = m_session->GetPlayer();
+        //MALL command
+        
+        Player *chr = m_session->GetPlayer();
 
-	   if (player->isInCombat())
-       {
-       SendSysMessage(LANG_YOU_IN_COMBAT);
-       SetSentErrorMessage(true);
-       return false;
-       }
-       if (player->isInFlight())
-       {
-       SendSysMessage(LANG_YOU_IN_FLIGHT);
-       SetSentErrorMessage(true);
-       return false;
-       }
+        if (chr->isInCombat())
+        {
+        SendSysMessage(LANG_YOU_IN_COMBAT);
+        SetSentErrorMessage(true);
+        return false;
+        }
+        if (chr->isInFlight())
+        {
+        SendSysMessage(LANG_YOU_IN_FLIGHT);
+        SetSentErrorMessage(true);
+        return false;
+        }
 
-       //player->ResurrectPlayer(0.5, false);
+        chr->ResurrectPlayer(0.5, false);
 
-       switch(player->GetTeam())
-  {
-       case ALLIANCE:
-               //player->TeleportTo(0, -8865.454102f, 591.230469f, 92.323326f, 4.69254f);    // Insert Ally mall Cords here
-			   player->TeleportTo(530, -1913.069214, 5404.819336, -12.428004, 0.301288);    // Insert Ally mall Cords here
-               break;
+        switch(chr->GetTeam())
+   {
+        case ALLIANCE:
+                //chr->TeleportTo(0, -8502.47f, 1100.86f, 20.4644f, 4.69254f);    // Insert Ally mall Cords here
+				chr->TeleportTo(530, -1913.069214, 5404.819336, -12.428004, 0.301288);    // Shattrath
+                break;
 
-       case HORDE:
-               //player->TeleportTo(1, 1554.14f, -4424.46f, 9.86212f, 5.96413f);    // Insert Horde mall Cords here
-			   player->TeleportTo(530, -1913.069214, 5404.819336, -12.428004, 0.301288);    // Insert Ally mall Cords here				
-               break;
-  }
-       return true;
+        case HORDE:
+                //chr->TeleportTo(1, 1554.14f, -4424.46f, 9.86212f, 5.96413f);    // Insert Horde mall Cords here
+				chr->TeleportTo(530, -1913.069214, 5404.819336, -12.428004, 0.301288);    // Shattrath
+                break;
+   }
+        return true;
 }
 
 

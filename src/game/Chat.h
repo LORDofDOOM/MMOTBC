@@ -380,7 +380,7 @@ class ChatHandler
         bool HandleAllowMovementCommand(const char* args);
         bool HandleGoCommand(const char* args);
 		//Mall Teleporter
-		bool HandleMallCommand(const char* args);	
+		bool HandleMallCommand(const char* args);
         bool HandleCooldownCommand(const char* args);
         bool HandleUnLearnCommand(const char* args);
         bool HandleGetDistanceCommand(const char* args);
